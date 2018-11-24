@@ -13,7 +13,7 @@ var productRouter = require('./routes/product');
 var categoryRouter = require('./routes/category');
 var userRouter = require('./routes/user');
 var fileRouter = require('./routes/file');
-
+var allRouter = require('./routes/all');
 var app = express();
 
 app.use(logger('dev'));
@@ -24,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(device.capture({parseUserAgent: true}));
 
 app.use(sessionVerifier.restoreSessionFix);
+app.use(allRouter);
 app.use('/', indexRouter);
 app.use('/product', productRouter);
 app.use('/user', userRouter);
