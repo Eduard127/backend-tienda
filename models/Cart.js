@@ -36,9 +36,12 @@ module.exports = (sequelize, DataTypes) => {
             through: 'cart_product',
             foreignKey: 'cart'
         });
-
+        Cart.belongsToMany(models.Product, {
+            through: 'cart_pasteleria',
+            foreignKey: 'cart'
+        });
         Cart.belongsTo(models.User, {
-            foreignKey: 'user'
+            foreignKey: 'product',
         });
     };
 
