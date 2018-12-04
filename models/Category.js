@@ -11,10 +11,6 @@ module.exports = (sequelize, DataTypes) => {
         nombre: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        Ingredientes: {
-            type: DataTypes.TEXT,
-            allowNull: false,
         }
     }, {
             // don't add the timestamp attributes (updatedAt, createdAt)
@@ -39,9 +35,13 @@ module.exports = (sequelize, DataTypes) => {
         });
 
     Category.associate = models => {
-        Category.hasMany(models.Product, {
-            as: 'Products',
+        Category.hasMany(models.Recipe, {
+            as: 'Recipes',
             foreignKey: 'category'
+        });
+
+        Category.belongsTo(models.File, {
+            foreignKey: 'photo'
         });
     };
 

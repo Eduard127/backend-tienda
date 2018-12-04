@@ -66,13 +66,6 @@ module.exports = (sequelize, DataTypes) => {
         });
 
     User.associate = models => {
-        //asociar los roles
-        User.belongsToMany(models.Role, {
-            as: 'Roles',
-            through: 'user_role',
-            foreignKey: 'user'
-        });
-
         User.belongsTo(models.File, {
             foreignKey: 'photo'
         });

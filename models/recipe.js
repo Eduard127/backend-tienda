@@ -1,13 +1,21 @@
 "use strict";
 
 module.exports = (sequelize, DataTypes) => {
-    let Cart = sequelize.define('Cart', {
+    let Recipe = sequelize.define('Recipe', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true
         },
+        nombre: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        description: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        }
     }, {
             // don't add the timestamp attributes (updatedAt, createdAt)
             timestamps: true,
@@ -22,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
             freezeTableName: false,
 
             // define the table's name
-            tableName: 'cart',
+            tableName: 'recipe',
 
             // Enable optimistic locking.  When enabled, sequelize will add a version count attribute
             // to the model and throw an OptimisticLockingError error when stale instances are saved.
@@ -30,20 +38,21 @@ module.exports = (sequelize, DataTypes) => {
             version: false
         });
 
-    Cart.associate = models => {
+    Recipe.associate = models => {
+        Recipe.belongsTo(models.Category, {
+            foreignKey: 'category'
+        });
 
-        Cart.belongsToMany(models.Product, {
-            through: 'cart_product',
-            foreignKey: 'cart'
+        Recipe.belongsTo(models.File, {
+            foreignKey: 'photo'
         });
-        Cart.belongsToMany(models.Product, {
-            through: 'cart_pasteleria',
-            foreignKey: 'cart'
-        });
-        Cart.belongsTo(models.User, {
-            foreignKey: 'product',
+
+        Recipe.belongsToMany(models.Ingredient, {
+            as: 'Ingredients',
+            through: 'recipe_ingredient',
+            foreignKey: 'recipe'
         });
     };
 
-    return Cart;
+    return Recipe;
 };

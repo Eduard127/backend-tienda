@@ -1,10 +1,6 @@
 let config = {};
 
 config.application = {};
-config.application.host = 'localhost';
-config.application.maxItemsPerPage = 100;
-
-config.application = {};
 config.application.host = 'localhost:3000';
 config.application.maxItemsPerPage = 100;
 config.application.xPowerBy='mi aplicacion';
@@ -27,7 +23,7 @@ config.database.operatorsAliases = false;
 
 config.sequelize = {};
 config.sequelize.sync = {};
-config.sequelize.sync.force = true;
+config.sequelize.sync.force = false;
 config.sequelize.sync.logging = null;
 
 config.crypto = {};

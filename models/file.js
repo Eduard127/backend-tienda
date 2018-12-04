@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         size: DataTypes.INTEGER.UNSIGNED
     }, {
-            tableName: 'File',
+            tableName: 'file',
             freezeTableName: true,
             underscored: false
         });
